@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: eshopuser
+      MONGO_INITDB_ROOT_PASSWORD: eshoppassword
+      MONGO_INITDB_DATABASE: eshop_db
+    volumes:
+      - mongo-data:/data/db
+
+  app:
+    build: .
+    container_name: eshop_app
+    ports:
+      - "8501:8501"
+    environment:
+      MONGO_URI: mongodb://eshopuser:eshoppassword@mongodb:27017/eshop_db
+    depends_on:
+      - mongodb
+
+volumes:
+  mongo-data:
