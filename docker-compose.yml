@@ -19,7 +19,7 @@ services:
     ports:
       - "8501:8501"
     environment:
-      MONGO_URI: mongodb://eshopuser:eshoppassword@mongodb:27017/eshop_db
+      MONGO_URI: mongodb://eshopuser:eshoppassword@mongodb:27017/eshop_db?authSource=admin
     depends_on:
       - mongodb
 
