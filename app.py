@@ -23,7 +23,7 @@ db = get_database()
 
 def insert_customer(name, email, region):
     """Insere um novo cliente na coleção 'clientes'."""
-    if db:
+    if db is not None:
         customers = db.clientes
         customer_data = {
             "nome": name,
@@ -37,7 +37,7 @@ def insert_customer(name, email, region):
 
 def get_customers_df():
     """Recupera todos os clientes e retorna como um DataFrame Pandas."""
-    if db:
+    if db is not None:
         customers = db.clientes
         df = pd.DataFrame(list(customers.find({}, {'_id': 0})))
         return df
@@ -47,7 +47,7 @@ def get_customers_df():
 
 st.title("E-Shop Brasil: Dashboard de Gestão de Dados (Big Data Simulação)")
 
-if db:
+if db is not None:
     st.success("Conexão com MongoDB estabelecida com sucesso!")
 
     # --- Seção 1: Adicionar Novo Cliente (Gestão de Dados) ---
